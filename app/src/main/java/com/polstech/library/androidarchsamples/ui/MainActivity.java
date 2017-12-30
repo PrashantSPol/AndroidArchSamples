@@ -1,9 +1,10 @@
-package pol.prashant.sample.viewmodelsample.ui;
+package com.polstech.library.androidarchsamples.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import pol.prashant.sample.viewmodelsample.R;
+import com.polstech.library.androidarchsamples.R;
+
 
 public class MainActivity extends AppCompatActivity {
 

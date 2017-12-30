@@ -1,4 +1,4 @@
-package pol.prashant.sample.viewmodelsample.logic;
+package com.polstech.library.androidarchsamples.logic;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;

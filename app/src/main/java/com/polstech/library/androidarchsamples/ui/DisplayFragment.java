@@ -1,18 +1,18 @@
-package pol.prashant.sample.viewmodelsample.ui;
+package com.polstech.library.androidarchsamples.ui;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import pol.prashant.sample.viewmodelsample.R;
-import pol.prashant.sample.viewmodelsample.logic.DataViewModel;
+import com.polstech.library.androidarchsamples.R;
+import com.polstech.library.androidarchsamples.logic.DataViewModel;
+
 
 /**
  * Created by prashant.pol on 12/25/2017.

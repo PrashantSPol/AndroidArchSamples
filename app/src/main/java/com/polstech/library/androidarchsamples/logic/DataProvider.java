@@ -1,8 +1,6 @@
-package pol.prashant.sample.viewmodelsample.logic;
+package com.polstech.library.androidarchsamples.logic;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by prashant.pol on 12/25/2017.
