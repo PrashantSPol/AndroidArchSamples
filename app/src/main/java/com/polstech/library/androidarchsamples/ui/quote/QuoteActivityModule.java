@@ -7,6 +7,8 @@ import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.logic.DataProvider;
 import com.polstech.library.androidarchsamples.ui.common.ViewModelFactory;
 
+import java.util.ArrayList;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -27,7 +29,7 @@ public class QuoteActivityModule {
     }
 
     @Provides
-    QuoteRecyclerAdapter providesQuoteRecyclerAdapter(Context context){
-        return new QuoteRecyclerAdapter(context, null);
+    QuoteRecyclerAdapter providesQuoteRecyclerAdapter(QuoteActivity quoteActivity){
+        return new QuoteRecyclerAdapter(quoteActivity, new ArrayList<>());
     }
 }

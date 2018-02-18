@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class QuoteViewModel extends BaseViewModel {
-    private ObservableList<String> observableList = new ObservableArrayList<>();
+    public ObservableList<String> observableList = new ObservableArrayList<>();
 
     private MutableLiveData<List<String>> mutableQuoteList = new MutableLiveData<>();
 
@@ -36,6 +36,11 @@ public class QuoteViewModel extends BaseViewModel {
 
     public ObservableList<String> getObservableList() {
         return observableList;
+    }
+
+    public void setObservableList(List<String> quotes) {
+        observableList.clear();
+        observableList.addAll(quotes);
     }
 
     public void setObservableList(ObservableList<String> observableList) {
