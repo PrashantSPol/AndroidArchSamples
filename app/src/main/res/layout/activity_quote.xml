@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="quoteListViewModel"
+            type="com.polstech.library.androidarchsamples.ui.quote.QuoteViewModel"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_quote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:layout_margin="10dp"
+            app:layout_anchor="@id/rv_quote"
+            app:layout_anchorGravity="bottom|right"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

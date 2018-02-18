@@ -28,4 +28,6 @@ task clean(type: Delete) {
 
 ext {
     dagger2version = "2.11"
+    rxjava2Version = "2.1.9"
+    rxandroidVersion = "2.0.2"
 }
