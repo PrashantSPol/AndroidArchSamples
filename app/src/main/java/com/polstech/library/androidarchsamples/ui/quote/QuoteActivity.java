@@ -10,8 +10,10 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.SimpleAdapter;
 
 import com.polstech.library.androidarchsamples.BR;
@@ -31,7 +33,7 @@ import dagger.BindsInstance;
  * Created by polprashant on 14/02/18.
  */
 
-public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel> {
+public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel> implements View.OnClickListener, QuoteActivityNavigator {
 
     @Inject
     DataManager dataManager;
@@ -43,6 +45,7 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
     QuoteRecyclerAdapter quoteRecyclerAdapter;
 
     private RecyclerView rvQuotes;
+    private FloatingActionButton fabAdd;
 
 
     @Override
@@ -64,8 +67,11 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
 
     void setUp() {
         rvQuotes = findViewById(R.id.rv_quote);
-        rvQuotes.setAdapter(quoteRecyclerAdapter);
+        fabAdd = findViewById(R.id.fab_add);
 
+        fabAdd.setOnClickListener(this);
+
+        rvQuotes.setAdapter(quoteRecyclerAdapter);
         rvQuotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
@@ -90,5 +96,17 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
         if(quotes != null) {
             quoteRecyclerAdapter.setQuoteData(quotes);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.fab_add) {
+            mViewModel.actionToAddQuote();
+        }
+    }
+
+    @Override
+    public void showDialogToGetQuote() {
+
     }
 }

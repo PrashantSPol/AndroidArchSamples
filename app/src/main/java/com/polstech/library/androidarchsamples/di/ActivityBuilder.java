@@ -2,10 +2,9 @@ package com.polstech.library.androidarchsamples.di;
 
 import com.polstech.library.androidarchsamples.ui.quote.QuoteActivity;
 import com.polstech.library.androidarchsamples.ui.quote.QuoteActivityModule;
+import com.polstech.library.androidarchsamples.ui.quote.dialog.QuoteDialogModule;
 
-import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 import dagger.android.ContributesAndroidInjector;
 
 /**
@@ -14,6 +13,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = QuoteActivityModule.class)
+    @ContributesAndroidInjector(modules = {QuoteActivityModule.class,
+            QuoteDialogModule.class})
     abstract public QuoteActivity bindQuoteActivity();
 }

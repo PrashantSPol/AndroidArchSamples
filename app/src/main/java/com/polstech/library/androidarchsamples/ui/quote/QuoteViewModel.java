@@ -34,6 +34,10 @@ public class QuoteViewModel extends BaseViewModel {
 
     }
 
+    public void actionToAddQuote() {
+
+    }
+
     public ObservableList<String> getObservableList() {
         return observableList;
     }
