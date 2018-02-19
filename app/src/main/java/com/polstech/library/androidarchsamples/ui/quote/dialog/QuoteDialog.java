@@ -2,7 +2,9 @@ package com.polstech.library.androidarchsamples.ui.quote.dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.polstech.library.androidarchsamples.R;
@@ -19,9 +21,8 @@ public class QuoteDialog extends DialogFragment {
     @Inject
     DataManager dataManager;
 
-
-
     BaseActivity mBaseActivity;
+    Dialog dialog;
 
     @Override
     public void onAttach(Context context) {
@@ -34,11 +35,16 @@ public class QuoteDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(mBaseActivity);
+        dialog = new Dialog(mBaseActivity);
         dialog.setContentView(R.layout.dialog_quote);
 
 
 
         return dialog;
+    }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        dialog.show();
     }
 }
