@@ -40,7 +40,7 @@ import dagger.android.HasFragmentInjector;
  * Created by polprashant on 14/02/18.
  */
 
-public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel> implements View.OnClickListener, QuoteActivityNavigator, HasFragmentInjector {
+public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewModel> implements View.OnClickListener, QuoteActivityNavigator, HasFragmentInjector {
 
     @Inject DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
      @Inject DataManager dataManager;
@@ -50,10 +50,6 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
 
     @Inject
     QuoteRecyclerAdapter quoteRecyclerAdapter;
-
-    private RecyclerView rvQuotes;
-    private FloatingActionButton fabAdd;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,13 +69,12 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
     }
 
     void setUp() {
-        rvQuotes = findViewById(R.id.rv_quote);
-        fabAdd = findViewById(R.id.fab_add);
+        mDataBindingUtil.fabAdd.setOnClickListener(this);
 
-        fabAdd.setOnClickListener(this);
-
-        rvQuotes.setAdapter(quoteRecyclerAdapter);
-        rvQuotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mDataBindingUtil.rvQuote.setLayoutManager(layoutManager);
+        mDataBindingUtil.rvQuote.setAdapter(quoteRecyclerAdapter);
 
         mViewModel.setQuoteActivityNavigator(this);
     }

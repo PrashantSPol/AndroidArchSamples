@@ -27,6 +27,7 @@ public class QuoteViewModel extends BaseViewModel {
 
     public void loadQuoteList() {
         dataManager.getQuoteList().subscribe(val -> {
+            Thread.sleep(2000);
             mutableQuoteList.setValue(val);
         });
     }

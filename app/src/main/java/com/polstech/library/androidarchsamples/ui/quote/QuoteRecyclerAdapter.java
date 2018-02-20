@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.polstech.library.androidarchsamples.R;
+import com.polstech.library.androidarchsamples.databinding.LayoutQuoteElementBinding;
 
 import java.util.List;
 
@@ -29,15 +30,15 @@ public class QuoteRecyclerAdapter extends RecyclerView.Adapter<QuoteRecyclerAdap
 
     @Override
     public QuoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_quote_element, null, false);
+        LayoutQuoteElementBinding binding = LayoutQuoteElementBinding.inflate(LayoutInflater.from(mContext), parent, false);
 
-        return new QuoteViewHolder(view);
+        return new QuoteViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(QuoteViewHolder holder, int position) {
         Log.i("CHECK_", "position is " + position);
-        holder.txtData.setText(mQuoteList.get(position));
+        holder.bind(mQuoteList.get(position));
     }
 
 
@@ -54,12 +55,25 @@ public class QuoteRecyclerAdapter extends RecyclerView.Adapter<QuoteRecyclerAdap
         notifyDataSetChanged();
     }
 
-    static class QuoteViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtData;
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-        public QuoteViewHolder(View itemView) {
-            super(itemView);
-            txtData = itemView.findViewById(R.id.txt_data);
+    static class QuoteViewHolder extends RecyclerView.ViewHolder {
+        LayoutQuoteElementBinding binding;
+
+        public QuoteViewHolder(LayoutQuoteElementBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        void bind(String text) {
+            QuoteElementViewModel<QuoteActivity> viewModel = new QuoteElementViewModel<>();
+            viewModel.text.set(text);
+
+            binding.setQuoteElementVM(viewModel);
+            binding.executePendingBindings();
         }
     }
 }
