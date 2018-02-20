@@ -1,5 +1,6 @@
 package com.polstech.library.androidarchsamples.ui.quote;
 
+import android.app.Fragment;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -13,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.SimpleAdapter;
 
@@ -22,21 +24,26 @@ import com.polstech.library.androidarchsamples.databinding.ActivityQuoteBinding;
 import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.ui.common.BaseActivity;
 import com.polstech.library.androidarchsamples.ui.common.BaseViewModel;
+import com.polstech.library.androidarchsamples.ui.quote.dialog.QuoteDialog;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
 import dagger.BindsInstance;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasFragmentInjector;
 
 /**
  * Created by polprashant on 14/02/18.
  */
 
-public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel> implements View.OnClickListener, QuoteActivityNavigator {
+public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel> implements View.OnClickListener, QuoteActivityNavigator, HasFragmentInjector {
 
-    @Inject
-    DataManager dataManager;
+    @Inject DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+     @Inject DataManager dataManager;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -55,7 +62,7 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
         loadData();
     }
 
-    void loadData() {
+    public void loadData() {
         mViewModel.loadQuoteList();
         mViewModel.getMutableQuoteList().observe(this, new Observer<List<String>>() {
             @Override
@@ -73,6 +80,8 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
 
         rvQuotes.setAdapter(quoteRecyclerAdapter);
         rvQuotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        mViewModel.setQuoteActivityNavigator(this);
     }
 
     @Override
@@ -107,6 +116,12 @@ public class QuoteActivity extends BaseActivity<ViewDataBinding, QuoteViewModel>
 
     @Override
     public void showDialogToGetQuote() {
+        Log.i("CHECK_", "showDialogToGetQuote");
+        QuoteDialog.newInstance().show(getFragmentManager(), "QuoteDialog");
+    }
 
+    @Override
+    public AndroidInjector<Fragment> fragmentInjector() {
+        return fragmentDispatchingAndroidInjector;
     }
 }

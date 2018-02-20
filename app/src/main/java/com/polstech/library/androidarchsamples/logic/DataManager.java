@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
@@ -24,5 +26,15 @@ public class DataManager {
             }
             return quotes;
         });
+    }
+
+    public Completable addQuote(String quote) {
+        return new Completable() {
+            @Override
+            protected void subscribeActual(CompletableObserver s) {
+                quotes.add(quote);
+                s.onComplete();
+            }
+        };
     }
 }

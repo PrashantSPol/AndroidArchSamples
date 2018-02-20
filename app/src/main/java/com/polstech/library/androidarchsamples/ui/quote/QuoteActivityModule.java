@@ -9,6 +9,8 @@ import com.polstech.library.androidarchsamples.ui.common.ViewModelFactory;
 
 import java.util.ArrayList;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -17,11 +19,6 @@ import dagger.Provides;
  */
 @Module
 public class QuoteActivityModule {
-
-    @Provides
-    DataManager providesDataProvider() {
-        return new DataManager();
-    }
 
     @Provides
     ViewModelProvider.Factory providesViewModelFactory(DataManager dataManager) {

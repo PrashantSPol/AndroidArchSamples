@@ -2,4 +2,7 @@
     <string name="app_name">ViewModelSample</string>
     <string name="str_add">add</string>
     <string name="str_cancel">cancel</string>
+
+    <string name="msg_enter_quote">Please enter quote</string>
+    <string name="msg_quote_add_success">Quote added successfully</string>
 </resources>

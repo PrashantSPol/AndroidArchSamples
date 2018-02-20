@@ -1,6 +1,11 @@
 package com.polstech.library.androidarchsamples.ui.quote.dialog;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.polstech.library.androidarchsamples.logic.DataManager;
+
+import java.util.logging.Logger;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,5 +15,9 @@ import dagger.Provides;
  */
 @Module
 public class QuoteDialogModule {
-
+    @Provides
+    QuoteDialogViewModel providesQuoteDialogViewModel(DataManager dataManager) {
+        Log.i("CHECK_", "Providing View Model **************************************************************");
+        return new QuoteDialogViewModel(dataManager);
+    }
 }

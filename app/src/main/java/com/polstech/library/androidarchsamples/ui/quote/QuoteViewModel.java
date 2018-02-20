@@ -19,6 +19,7 @@ public class QuoteViewModel extends BaseViewModel {
     private MutableLiveData<List<String>> mutableQuoteList = new MutableLiveData<>();
 
     private DataManager dataManager;
+    private QuoteActivityNavigator quoteActivityNavigator;
 
     public QuoteViewModel(DataManager dataManager) {
         this.dataManager = dataManager;
@@ -30,12 +31,12 @@ public class QuoteViewModel extends BaseViewModel {
         });
     }
 
-    public void addQuote(String quote) {
-
+    public void actionToAddQuote() {
+        quoteActivityNavigator.showDialogToGetQuote();
     }
 
-    public void actionToAddQuote() {
-
+    void setQuoteActivityNavigator(QuoteActivityNavigator quoteActivityNavigator) {
+        this.quoteActivityNavigator = quoteActivityNavigator;
     }
 
     public ObservableList<String> getObservableList() {
