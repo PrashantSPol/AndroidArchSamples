@@ -11,8 +11,4 @@ import dagger.Provides;
 @Module
 public class QuoteDialogModule {
 
-    @Provides
-    DataManager providesDataManager() {
-        return new DataManager();
-    }
 }
