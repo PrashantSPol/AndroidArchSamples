@@ -37,8 +37,8 @@ public class QuoteDialog extends DialogFragment implements View.OnClickListener,
 
     @Inject
     QuoteDialogViewModel quoteDialogViewModel;
-    @Inject
-    ToastUtil toastUtil;
+
+    @Inject ToastUtil toastUtil;
 
     QuoteActivity mQuoteActivity;
     Dialog dialog;

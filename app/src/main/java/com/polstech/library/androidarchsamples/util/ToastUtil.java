@@ -13,9 +13,7 @@ import javax.inject.Inject;
  */
 
 public class ToastUtil {
-    @AppContext
-    @Inject
-    Context appContext;
+
 
     Context mContext;
 

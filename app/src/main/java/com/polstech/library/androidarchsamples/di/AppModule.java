@@ -20,8 +20,8 @@ import dagger.Provides;
 public class AppModule {
 
     @Provides
-    @AppContext
-    public Context providesAppContext(AndroidArchSampleApp application) {
+    @Singleton
+    public @AppContext Context providesAppContext(Application application) {
         return application.getApplicationContext();
     }
 
@@ -33,7 +33,8 @@ public class AppModule {
 
 
     @Provides
-    public ToastUtil providesToastUtil() {
-        return new ToastUtil();
+    @Singleton
+    public ToastUtil providesToastUtil(@AppContext Context context) {
+        return new ToastUtil(context);
     }
 }
