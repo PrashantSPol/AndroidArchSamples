@@ -18,6 +18,9 @@ public class SellingListActivity extends BaseActivity<ActivitySellingListBinding
     @Inject
     SellingListViewModel sellingListViewModel;
 
+    @Inject
+    SellingListPagerAdapter sellingListPagerAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

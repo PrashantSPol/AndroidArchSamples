@@ -13,4 +13,9 @@ public class SellingListActivityModule {
     SellingListViewModel providesSellingListViewModel() {
         return new SellingListViewModel();
     }
+
+    @Provides
+    SellingListPagerAdapter providesSellingListPagerAdapter() {
+        return new SellingListPagerAdapter();
+    }
 }
