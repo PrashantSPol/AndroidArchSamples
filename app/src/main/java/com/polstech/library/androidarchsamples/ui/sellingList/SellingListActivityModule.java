@@ -1,5 +1,9 @@
 package com.polstech.library.androidarchsamples.ui.sellingList;
 
+import android.content.Context;
+
+import com.polstech.library.androidarchsamples.di.qualifier.AppContext;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -15,7 +19,7 @@ public class SellingListActivityModule {
     }
 
     @Provides
-    SellingListPagerAdapter providesSellingListPagerAdapter() {
-        return new SellingListPagerAdapter();
+    SellingListPagerAdapter providesSellingListPagerAdapter(@AppContext Context context, SellingListActivity sellingListActivity) {
+        return new SellingListPagerAdapter(context, sellingListActivity.getSupportFragmentManager());
     }
 }

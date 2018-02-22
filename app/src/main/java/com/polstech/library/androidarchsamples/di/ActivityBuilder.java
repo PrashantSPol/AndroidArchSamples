@@ -6,6 +6,8 @@ import com.polstech.library.androidarchsamples.ui.quote.dialog.QuoteDialogModule
 import com.polstech.library.androidarchsamples.ui.quote.dialog.QuoteDialogProvider;
 import com.polstech.library.androidarchsamples.ui.sellingList.SellingListActivity;
 import com.polstech.library.androidarchsamples.ui.sellingList.SellingListActivityModule;
+import com.polstech.library.androidarchsamples.ui.sellingList.inSale.InSaleSellingFragmentProvider;
+import com.polstech.library.androidarchsamples.ui.sellingList.soldOut.SoldOutSellingFragmentProvider;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -20,6 +22,6 @@ public abstract class ActivityBuilder {
             QuoteDialogProvider.class})
     abstract public QuoteActivity bindQuoteActivity();
 
-    @ContributesAndroidInjector(modules = {SellingListActivityModule.class})
+    @ContributesAndroidInjector(modules = {SellingListActivityModule.class, InSaleSellingFragmentProvider.class, SoldOutSellingFragmentProvider.class})
     abstract public SellingListActivity bindSellingListActivity();
 }

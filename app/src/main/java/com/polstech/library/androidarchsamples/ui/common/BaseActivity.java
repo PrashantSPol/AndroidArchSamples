@@ -33,7 +33,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         mDataBindingUtil = DataBindingUtil.setContentView(this, getLayoutId());
         mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mDataBindingUtil.setVariable(getBindingVariable(), mViewModel);
-        mDataBindingUtil.executePendingBindings();
     }
 
     abstract protected int getLayoutId();

@@ -11,6 +11,10 @@
         android:theme="@style/AppTheme"
         android:name=".AndroidArchSampleApp">
         <activity android:name=".ui.quote.QuoteActivity">
+
+        </activity>
+
+        <activity android:name=".ui.sellingList.SellingListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
