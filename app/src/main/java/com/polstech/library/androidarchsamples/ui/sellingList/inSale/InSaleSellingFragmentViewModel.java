@@ -1,20 +1,15 @@
 package com.polstech.library.androidarchsamples.ui.sellingList.inSale;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 
 import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.ui.common.BaseViewModel;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
-import com.polstech.library.androidarchsamples.ui.sellingList.common.SellingListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by prashant.pol on 2/21/2018.
@@ -27,7 +22,7 @@ public class InSaleSellingFragmentViewModel extends BaseViewModel {
     void loadData(DataManager dataManager) {
         Log.i("CHECK_", "load Data called");
         compositeDisposable.add(dataManager
-                .getProductList().subscribe(list -> {
+                .getInSaleProductList().subscribe(list -> {
                     Log.i("CHECK_", "setting data to mutable list " + list);
             productLiveData.setValue(list);
         }));

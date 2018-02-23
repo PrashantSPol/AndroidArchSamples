@@ -16,6 +16,7 @@ public class SellingListElementViewModel extends BaseViewModel {
     public ObservableField<String> productName = new ObservableField<>();
     public ObservableField<Integer> imageUrl = new ObservableField<>();
     public ObservableField<String> price = new ObservableField<>();
+    public ObservableField<Boolean> isInSale = new ObservableField<>();
 
     public void setProduct(Product product) {
         if(product == null) {
@@ -25,6 +26,7 @@ public class SellingListElementViewModel extends BaseViewModel {
         productName.set(product.productName);
         imageUrl.set(product.imageUrl);
         price.set(String.valueOf(product.price));
+        isInSale.set(product.isInSale);
     }
 
     @BindingAdapter({"imageUrl"})

@@ -42,12 +42,27 @@ public class DataManager {
         };
     }
 
-    public Observable<List<Product>> getProductList() {
+    public Observable<List<Product>> getInSaleProductList() {
         return Observable.fromCallable(() -> {
             if(productList == null) {
                 productList = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
-                    Product product = new Product("Product " + i, R.drawable.koala, i * 100);
+                    Product product = new Product("Product " + i, R.drawable.koala, i * 100, true);
+                    productList.add(product);
+                }
+            }
+
+            return productList;
+        });
+    }
+
+
+    public Observable<List<Product>> getSoldOutProductList() {
+        return Observable.fromCallable(() -> {
+            if(productList == null) {
+                productList = new ArrayList<>();
+                for (int i = 1; i <= 10; i++) {
+                    Product product = new Product("Product " + i, R.drawable.koala, i * 100, false);
                     productList.add(product);
                 }
             }
