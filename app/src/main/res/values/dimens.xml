@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="selling_list_product_width">100dp</dimen>
+    <dimen name="size_product_name">25sp</dimen>
+    <dimen name="size_product_price">20sp</dimen>
+</resources>

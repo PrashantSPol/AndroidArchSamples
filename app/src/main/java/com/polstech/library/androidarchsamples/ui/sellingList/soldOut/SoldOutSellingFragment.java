@@ -1,5 +1,6 @@
 package com.polstech.library.androidarchsamples.ui.sellingList.soldOut;
 
+import com.polstech.library.androidarchsamples.BR;
 import com.polstech.library.androidarchsamples.R;
 import com.polstech.library.androidarchsamples.databinding.FragmentSoldOutSellingBinding;
 import com.polstech.library.androidarchsamples.ui.common.BaseFragment;
@@ -27,5 +28,10 @@ public class SoldOutSellingFragment extends BaseFragment<FragmentSoldOutSellingB
     @Override
     protected SoldOutSellingFragmentViewModel getViewModel() {
         return soldOutSellingFragmentViewModel;
+    }
+
+    @Override
+    protected int getBindingVariable() {
+        return BR.soldOutVM;
     }
 }

@@ -96,6 +96,7 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
 
     @BindingAdapter({"adapter"})
     public static void bindingAdapter(RecyclerView recyclerView, List<String> quotes) {
+        Log.i("CHECK_", "binding adapter in Quote Activity");
         QuoteRecyclerAdapter quoteRecyclerAdapter = (QuoteRecyclerAdapter) recyclerView.getAdapter();
         if(quotes != null) {
             quoteRecyclerAdapter.setQuoteData(quotes);

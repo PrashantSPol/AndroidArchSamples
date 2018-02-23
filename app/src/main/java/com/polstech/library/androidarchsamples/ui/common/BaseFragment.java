@@ -17,15 +17,14 @@ import dagger.android.support.AndroidSupportInjection;
  */
 
 public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseViewModel> extends Fragment{
-    T mViewDataBinding;
-    V mViewModel;
-    View mRootView;
+    protected T mViewDataBinding;
+    protected V mViewModel;
+    protected View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setupInjection();
         super.onCreate(savedInstanceState);
-        mViewModel = getViewModel();
     }
 
     @Nullable
@@ -34,6 +33,8 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
         mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         mRootView = mViewDataBinding.getRoot();
 
+        mViewModel = mViewModel == null ? getViewModel() : mViewModel;
+        mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         return mRootView;
     }
 
@@ -43,4 +44,5 @@ public abstract class BaseFragment<T extends ViewDataBinding, V extends BaseView
 
     abstract protected int getLayoutId();
     abstract protected V getViewModel();
+    abstract protected int getBindingVariable();
 }

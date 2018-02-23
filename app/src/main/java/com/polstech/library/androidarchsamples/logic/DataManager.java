@@ -1,13 +1,16 @@
 package com.polstech.library.androidarchsamples.logic;
 
+import com.polstech.library.androidarchsamples.R;
+import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by polprashant on 18/02/18.
@@ -15,6 +18,7 @@ import io.reactivex.Observable;
 
 public class DataManager {
     List<String> quotes;
+    List<Product> productList;
 
     public Observable<List<String>> getQuoteList() {
         return Observable.fromCallable(() -> {
@@ -36,5 +40,19 @@ public class DataManager {
                 s.onComplete();
             }
         };
+    }
+
+    public Observable<List<Product>> getProductList() {
+        return Observable.fromCallable(() -> {
+            if(productList == null) {
+                productList = new ArrayList<>();
+                for (int i = 1; i <= 10; i++) {
+                    Product product = new Product("Product " + i, R.drawable.koala, i * 100);
+                    productList.add(product);
+                }
+            }
+
+            return productList;
+        });
     }
 }

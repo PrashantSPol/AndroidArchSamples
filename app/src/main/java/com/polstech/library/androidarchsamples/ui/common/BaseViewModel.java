@@ -10,10 +10,10 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class BaseViewModel<N> extends ViewModel {
     protected N mNavigator;
-    CompositeDisposable compositeDisposable;
+    protected CompositeDisposable compositeDisposable;
 
     public BaseViewModel() {
-
+        compositeDisposable = new CompositeDisposable();
     }
 
     public void setNavigator(N navigator) {
