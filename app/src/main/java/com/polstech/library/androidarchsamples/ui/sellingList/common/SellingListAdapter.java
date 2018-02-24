@@ -4,11 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.polstech.library.androidarchsamples.databinding.LayoutProductListBinding;
-import com.polstech.library.androidarchsamples.ui.sellingList.inSale.InSaleSellingFragmentViewModel;
 
 import java.util.List;
 

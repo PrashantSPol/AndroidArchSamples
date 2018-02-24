@@ -5,7 +5,7 @@
     <data>
         <variable
             name="inSaleVM"
-            type="com.polstech.library.androidarchsamples.ui.sellingList.inSale.InSaleSellingFragmentViewModel"/>
+            type="com.polstech.library.androidarchsamples.ui.sellingList.common.SellingFragmentViewModel"/>
         <import type="android.view.View"/>
     </data>
     <android.support.constraint.ConstraintLayout

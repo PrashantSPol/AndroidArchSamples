@@ -1,4 +1,4 @@
-package com.polstech.library.androidarchsamples.ui.sellingList.inSale;
+package com.polstech.library.androidarchsamples.ui.sellingList.common;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
@@ -15,20 +15,26 @@ import java.util.List;
  * Created by prashant.pol on 2/21/2018.
  */
 
-public class InSaleSellingFragmentViewModel extends BaseViewModel {
+public class SellingFragmentViewModel extends BaseViewModel {
     public ObservableField<List<Product>> productList = new ObservableField<>(new ArrayList<>());
-    MutableLiveData<List<Product>> productLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<Product>> productLiveData = new MutableLiveData<>();
 
-    void loadData(DataManager dataManager) {
-        Log.i("CHECK_", "load Data called");
+    public void loadInSaleProducts(DataManager dataManager) {
         compositeDisposable.add(dataManager
                 .getInSaleProductList().subscribe(list -> {
-                    Log.i("CHECK_", "setting data to mutable list " + list);
             productLiveData.setValue(list);
         }));
     }
 
-    void setProductList(List<Product> productList) {
+    public void loadSoldOutProducts(DataManager dataManager) {
+        compositeDisposable.add(dataManager
+                .getSoldOutProductList().subscribe(list -> {
+                    Log.i("CHECK_", "Sold composite " + list);
+                    productLiveData.setValue(list);
+                }));
+    }
+
+    public void setProductList(List<Product> productList) {
         this.productList.set(productList);
     }
 }

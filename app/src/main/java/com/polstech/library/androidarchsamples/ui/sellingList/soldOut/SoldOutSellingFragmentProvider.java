@@ -1,5 +1,7 @@
 package com.polstech.library.androidarchsamples.ui.sellingList.soldOut;
 
+import com.polstech.library.androidarchsamples.ui.sellingList.inSale.InSaleSellingFragmentModule;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 

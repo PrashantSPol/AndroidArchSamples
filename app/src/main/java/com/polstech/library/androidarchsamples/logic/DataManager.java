@@ -9,8 +9,6 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by polprashant on 18/02/18.
@@ -18,7 +16,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DataManager {
     List<String> quotes;
-    List<Product> productList;
+    List<Product> inSaleProductList;
+    List<Product> soldOutProductList;
 
     public Observable<List<String>> getQuoteList() {
         return Observable.fromCallable(() -> {
@@ -44,30 +43,30 @@ public class DataManager {
 
     public Observable<List<Product>> getInSaleProductList() {
         return Observable.fromCallable(() -> {
-            if(productList == null) {
-                productList = new ArrayList<>();
+            if(inSaleProductList == null) {
+                inSaleProductList = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
                     Product product = new Product("Product " + i, R.drawable.koala, i * 100, true);
-                    productList.add(product);
+                    inSaleProductList.add(product);
                 }
             }
 
-            return productList;
+            return inSaleProductList;
         });
     }
 
 
     public Observable<List<Product>> getSoldOutProductList() {
         return Observable.fromCallable(() -> {
-            if(productList == null) {
-                productList = new ArrayList<>();
+            if(soldOutProductList == null) {
+                soldOutProductList = new ArrayList<>();
                 for (int i = 1; i <= 10; i++) {
                     Product product = new Product("Product " + i, R.drawable.koala, i * 100, false);
-                    productList.add(product);
+                    soldOutProductList.add(product);
                 }
             }
 
-            return productList;
+            return soldOutProductList;
         });
     }
 }

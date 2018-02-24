@@ -10,9 +10,10 @@ import android.view.View;
 
 import com.polstech.library.androidarchsamples.BR;
 import com.polstech.library.androidarchsamples.R;
-import com.polstech.library.androidarchsamples.databinding.FragmentInSaleSellingBinding;
+import com.polstech.library.androidarchsamples.databinding.FragmentSellingBinding;
 import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.ui.common.BaseFragment;
+import com.polstech.library.androidarchsamples.ui.sellingList.common.SellingFragmentViewModel;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.SellingListAdapter;
 
@@ -24,7 +25,7 @@ import javax.inject.Inject;
  * Created by prashant.pol on 2/21/2018.
  */
 
-public class InSaleSellingFragment extends BaseFragment<FragmentInSaleSellingBinding, InSaleSellingFragmentViewModel> {
+public class InSaleSellingFragment extends BaseFragment<FragmentSellingBinding, SellingFragmentViewModel> {
 
     public static InSaleSellingFragment newInstance() {
         return new InSaleSellingFragment();
@@ -58,7 +59,7 @@ public class InSaleSellingFragment extends BaseFragment<FragmentInSaleSellingBin
             mViewModel.setProductList(list);
         });
 
-        mViewModel.loadData(dataManager);
+        mViewModel.loadInSaleProducts(dataManager);
     }
 
     @BindingAdapter({"adapter"})
@@ -70,12 +71,12 @@ public class InSaleSellingFragment extends BaseFragment<FragmentInSaleSellingBin
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_in_sale_selling;
+        return R.layout.fragment_selling;
     }
 
     @Override
-    protected InSaleSellingFragmentViewModel getViewModel() {
-        return ViewModelProviders.of(this).get(InSaleSellingFragmentViewModel.class);
+    protected SellingFragmentViewModel getViewModel() {
+        return ViewModelProviders.of(this).get(SellingFragmentViewModel.class);
     }
 
     @Override
