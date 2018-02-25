@@ -14,10 +14,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,11 +60,23 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
     @Inject
     QuoteRecyclerAdapter quoteRecyclerAdapter;
 
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    FloatingActionButton fabAdd;
+    RecyclerView rvQuotes;
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUp();
         loadData();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mDataBindingUtil.navigationView.getMenu().findItem(R.id.menu_quote).setChecked(true);
     }
 
     public void loadData() {
@@ -75,7 +90,12 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
     }
 
     void setUp() {
-        setSupportActionBar(mDataBindingUtil.toolbar);
+        drawerLayout = mDataBindingUtil.drawerlayout;
+        navigationView = mDataBindingUtil.navigationView;
+        fabAdd = mDataBindingUtil.fabAdd;
+        toolbar = mDataBindingUtil.toolbar;
+
+        setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setHomeButtonEnabled(true);
@@ -83,25 +103,27 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
 
         setupNavigation();
 
-        mDataBindingUtil.fabAdd.setOnClickListener(this);
+        fabAdd.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mDataBindingUtil.rvQuote.setLayoutManager(layoutManager);
-        mDataBindingUtil.rvQuote.setAdapter(quoteRecyclerAdapter);
+        rvQuotes.setLayoutManager(layoutManager);
+        rvQuotes.setAdapter(quoteRecyclerAdapter);
 
         mViewModel.setQuoteActivityNavigator(this);
     }
 
     void  setupNavigation() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDataBindingUtil.drawerlayout, mDataBindingUtil.toolbar, R.string.str_drawer_open, R.string.str_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.str_drawer_open, R.string.str_drawer_close);
         toggle.syncState();
 
-        mDataBindingUtil.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
                 switch (item.getItemId()) {
                     case R.id.menu_quote :
+                        drawerLayout.closeDrawer(Gravity.START);
                         break;
                     case R.id.menu_selling_list :
                         startActivity(SellingListActivity.newInstance(QuoteActivity.this));
@@ -111,19 +133,6 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
                 return true;
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_quote :
-                Log.i("CHECK_", "quotes selected");
-                break;
-            case R.id.menu_selling_list :
-                Log.i("CHECK_", "selling list selected");
-                break;
-        }
-        return true;
     }
 
     @Override
