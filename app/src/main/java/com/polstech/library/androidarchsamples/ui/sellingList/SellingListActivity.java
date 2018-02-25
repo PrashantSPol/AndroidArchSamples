@@ -1,9 +1,13 @@
 package com.polstech.library.androidarchsamples.ui.sellingList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.polstech.library.androidarchsamples.BR;
 import com.polstech.library.androidarchsamples.R;
@@ -31,6 +35,10 @@ public class SellingListActivity extends BaseActivity<ActivitySellingListBinding
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
 
+    public static Intent newInstance(Context context) {
+        return new Intent(context, SellingListActivity.class);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,7 @@ public class SellingListActivity extends BaseActivity<ActivitySellingListBinding
 
         setSupportActionBar(mDataBindingUtil.toolbar);
         if(getSupportActionBar() != null) {
-            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
@@ -75,5 +83,16 @@ public class SellingListActivity extends BaseActivity<ActivitySellingListBinding
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home :
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

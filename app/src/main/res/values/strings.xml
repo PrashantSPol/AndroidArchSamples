@@ -1,9 +1,14 @@
 <resources>
-    <string name="app_name">ViewModelSample</string>
+    <string name="app_name">Android MVVP Sample</string>
     <string name="str_add">add</string>
     <string name="str_cancel">cancel</string>
     <string name="str_in_sale">In Sale</string>
     <string name="str_sold_out">Sold Out</string>
+    <string name="str_quotes">Quotes</string>
+    <string name="str_selling_list">Selling List</string>
+
+    <string name="str_drawer_open">Drawer Open</string>
+    <string name="str_drawer_close">Drawer Close</string>
 
     <string name="msg_enter_quote">Please enter quote</string>
     <string name="msg_quote_add_success">Quote added successfully</string>

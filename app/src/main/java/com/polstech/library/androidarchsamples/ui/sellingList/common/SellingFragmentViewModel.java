@@ -29,7 +29,6 @@ public class SellingFragmentViewModel extends BaseViewModel {
     public void loadSoldOutProducts(DataManager dataManager) {
         compositeDisposable.add(dataManager
                 .getSoldOutProductList().subscribe(list -> {
-                    Log.i("CHECK_", "Sold composite " + list);
                     productLiveData.setValue(list);
                 }));
     }

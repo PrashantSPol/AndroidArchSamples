@@ -32,7 +32,6 @@ public class SellingListAdapter extends RecyclerView.Adapter<SellingListAdapter.
 
     @Override
     public void onBindViewHolder(SellingListViewHolder holder, int position) {
-        Log.i("CHECK_", "bind viewHolder " + productList.get(position));
         Product product = productList.get(position);
         SellingListElementViewModel sellingListElementViewModel = new SellingListElementViewModel();
         sellingListElementViewModel.setProduct(product);

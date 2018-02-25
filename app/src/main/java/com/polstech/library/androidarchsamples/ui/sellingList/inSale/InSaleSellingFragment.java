@@ -55,7 +55,6 @@ public class InSaleSellingFragment extends BaseFragment<FragmentSellingBinding, 
 
     void loadProducts() {
         mViewModel.productLiveData.observe(this, list -> {
-            Log.i("CHECK_", "setting ot observable");
             mViewModel.setProductList(list);
         });
 
@@ -66,7 +65,6 @@ public class InSaleSellingFragment extends BaseFragment<FragmentSellingBinding, 
     public static void bindingAdapter(RecyclerView recyclerView, List<Product> list) {
         SellingListAdapter sellingListAdapter = (SellingListAdapter) recyclerView.getAdapter();
         sellingListAdapter.setProducts(list);
-        Log.i("CHECK_", "set adapter " + list);
     }
 
     @Override

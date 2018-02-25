@@ -37,19 +37,16 @@ public class QuoteRecyclerAdapter extends RecyclerView.Adapter<QuoteRecyclerAdap
 
     @Override
     public void onBindViewHolder(QuoteViewHolder holder, int position) {
-        Log.i("CHECK_", "position is " + position);
         holder.bind(mQuoteList.get(position));
     }
 
 
     @Override
     public int getItemCount() {
-        Log.i("CHECK_", "count is " + mQuoteList.size());
         return mQuoteList.size();
     }
 
     public void setQuoteData(List<String> quotes) {
-        Log.i("CHECK_", "Quote data is " + quotes);
         mQuoteList.clear();
         mQuoteList.addAll(quotes);
         notifyDataSetChanged();

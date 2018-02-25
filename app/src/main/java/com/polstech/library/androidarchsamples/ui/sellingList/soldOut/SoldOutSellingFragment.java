@@ -55,7 +55,6 @@ public class SoldOutSellingFragment extends BaseFragment<FragmentSellingBinding,
 
     void loadData() {
         mViewModel.productLiveData.observe(this, list -> {
-            Log.i("CHECK_", "Sold out observe " + list);
             mViewModel.setProductList(list);
         });
 

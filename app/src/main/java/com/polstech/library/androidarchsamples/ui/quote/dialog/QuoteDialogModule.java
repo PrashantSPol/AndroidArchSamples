@@ -17,7 +17,6 @@ import dagger.Provides;
 public class QuoteDialogModule {
     @Provides
     QuoteDialogViewModel providesQuoteDialogViewModel(DataManager dataManager) {
-        Log.i("CHECK_", "Providing View Model **************************************************************");
         return new QuoteDialogViewModel(dataManager);
     }
 }

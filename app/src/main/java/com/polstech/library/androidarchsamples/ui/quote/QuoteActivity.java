@@ -10,11 +10,16 @@ import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SimpleAdapter;
 
@@ -25,6 +30,7 @@ import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.ui.common.BaseActivity;
 import com.polstech.library.androidarchsamples.ui.common.BaseViewModel;
 import com.polstech.library.androidarchsamples.ui.quote.dialog.QuoteDialog;
+import com.polstech.library.androidarchsamples.ui.sellingList.SellingListActivity;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -69,6 +75,14 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
     }
 
     void setUp() {
+        setSupportActionBar(mDataBindingUtil.toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
+
+        setupNavigation();
+
         mDataBindingUtil.fabAdd.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -77,6 +91,39 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
         mDataBindingUtil.rvQuote.setAdapter(quoteRecyclerAdapter);
 
         mViewModel.setQuoteActivityNavigator(this);
+    }
+
+    void  setupNavigation() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDataBindingUtil.drawerlayout, mDataBindingUtil.toolbar, R.string.str_drawer_open, R.string.str_drawer_close);
+        toggle.syncState();
+
+        mDataBindingUtil.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_quote :
+                        break;
+                    case R.id.menu_selling_list :
+                        startActivity(SellingListActivity.newInstance(QuoteActivity.this));
+                        break;
+                }
+
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_quote :
+                Log.i("CHECK_", "quotes selected");
+                break;
+            case R.id.menu_selling_list :
+                Log.i("CHECK_", "selling list selected");
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -96,11 +143,17 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
 
     @BindingAdapter({"adapter"})
     public static void bindingAdapter(RecyclerView recyclerView, List<String> quotes) {
-        Log.i("CHECK_", "binding adapter in Quote Activity");
         QuoteRecyclerAdapter quoteRecyclerAdapter = (QuoteRecyclerAdapter) recyclerView.getAdapter();
         if(quotes != null) {
             quoteRecyclerAdapter.setQuoteData(quotes);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
+
+        return true;
     }
 
     @Override
@@ -112,7 +165,6 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
 
     @Override
     public void showDialogToGetQuote() {
-        Log.i("CHECK_", "showDialogToGetQuote");
         QuoteDialog.newInstance().show(getFragmentManager(), "QuoteDialog");
     }
 
