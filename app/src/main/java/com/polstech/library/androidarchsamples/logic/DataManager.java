@@ -9,6 +9,8 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by polprashant on 18/02/18.
@@ -27,8 +29,10 @@ public class DataManager {
                     quotes.add("Quote Number " + i);
                 }
             }
+            Thread.sleep(2000);
             return quotes;
-        });
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Completable addQuote(String quote) {
