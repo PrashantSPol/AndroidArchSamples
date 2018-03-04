@@ -94,6 +94,7 @@ public class QuoteActivity extends BaseActivity<ActivityQuoteBinding, QuoteViewM
         navigationView = mDataBindingUtil.navigationView;
         fabAdd = mDataBindingUtil.fabAdd;
         toolbar = mDataBindingUtil.toolbar;
+        rvQuotes = mDataBindingUtil.rvQuote;
 
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
