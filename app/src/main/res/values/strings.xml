@@ -6,6 +6,7 @@
     <string name="str_sold_out">Sold Out</string>
     <string name="str_quotes">Quotes</string>
     <string name="str_selling_list">Selling List</string>
+    <string name="str_new_quote">Enter New Quote</string>
 
     <string name="str_drawer_open">Drawer Open</string>
     <string name="str_drawer_close">Drawer Close</string>
