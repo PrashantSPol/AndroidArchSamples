@@ -52,6 +52,7 @@
             android:textSize="@dimen/size_product_price"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toEndOf="@+id/img_product"
             app:layout_constraintTop_toBottomOf="@+id/txt_product" />
 
@@ -61,13 +62,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:padding="5dp"
             android:text="Sold Out"
+            android:textSize="@dimen/size_product_price"
             android:visibility="@{sellingListElementVM.isInSale ? View.GONE : View.VISIBLE}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_price"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/txt_price"/>
+            app:layout_constraintTop_toBottomOf="@+id/txt_product" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>
