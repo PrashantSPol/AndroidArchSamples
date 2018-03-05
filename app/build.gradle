@@ -41,6 +41,10 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
 
+    // retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit2AdapterVersion"
+
     // dependency injection
     implementation "com.google.dagger:dagger-android:$rootProject.dagger2version"
     implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2version"
