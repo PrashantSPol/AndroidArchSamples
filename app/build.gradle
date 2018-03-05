@@ -44,6 +44,7 @@ dependencies {
     // retrofit
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit2AdapterVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version"
 
     // dependency injection
     implementation "com.google.dagger:dagger-android:$rootProject.dagger2version"
