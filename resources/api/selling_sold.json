@@ -1,0 +1,99 @@
+{
+	"products": [{
+			"productName": "Product Name 1",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/1.jpg",
+			"price": 100,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 2",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/2.jpg",
+			"price": 200,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 3",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/3.jpg",
+			"price": 300,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 4",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/4.jpg",
+			"price": 400,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 5",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/5.jpg",
+			"price": 500,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 6",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/1.jpg",
+			"price": 600,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 7",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/2.jpg",
+			"price": 700,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 8",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/3.jpg",
+			"price": 800,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 9",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/4.jpg",
+			"price": 900,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 10",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/5.jpg",
+			"price": 1000,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 11",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/1.jpg",
+			"price": 1100,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 12",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/2.jpg",
+			"price": 1200,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 13",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/3.jpg",
+			"price": 1300,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 14",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/4.jpg",
+			"price": 1400,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 15",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/5.jpg",
+			"price": 1500,
+			isInSale: false
+		},
+		{
+			"productName": "Product Name 16",
+			"imageUrl": "https://github.com/PrashantSPol/AndroidArchSamples/tree/master/resources/img/1.jpg",
+			"price": 1600,
+			isInSale: false
+		}
+	]
+}
