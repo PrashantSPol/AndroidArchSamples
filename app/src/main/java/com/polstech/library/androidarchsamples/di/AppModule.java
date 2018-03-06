@@ -6,6 +6,8 @@ import android.content.Context;
 import com.polstech.library.androidarchsamples.di.qualifier.AppContext;
 import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
+import com.polstech.library.androidarchsamples.network.schedulers.AppSchedulerProvider;
+import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
 import com.polstech.library.androidarchsamples.util.ToastUtil;
 
 import javax.inject.Singleton;
@@ -27,8 +29,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager providesDataProvider() {
-        return new DataManager();
+    DataManager providesDataProvider(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
+        return new DataManager(retrofitFactory, schedulerProvider);
     }
 
 
@@ -42,5 +44,11 @@ public class AppModule {
     @Singleton
     public RetrofitFactory getRetrofitFactory() {
         return new RetrofitFactory();
+    }
+
+    @Provides
+    @Singleton
+    public SchedulerProvider getSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 }

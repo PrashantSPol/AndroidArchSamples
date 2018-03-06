@@ -1,5 +1,7 @@
 package com.polstech.library.androidarchsamples.network.requests;
 
+import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -11,5 +13,5 @@ import retrofit2.http.GET;
 
 public interface IQuoteGet {
     @GET("quotes.json")
-    Observable<List<String>> getQuoteList();
+    Observable<QuoteListResponse> getQuoteList();
 }

@@ -1,10 +1,18 @@
 package com.polstech.library.androidarchsamples.logic;
 
+import android.util.Log;
+
 import com.polstech.library.androidarchsamples.R;
+import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
+import com.polstech.library.androidarchsamples.network.ApiService;
+import com.polstech.library.androidarchsamples.network.RetrofitFactory;
+import com.polstech.library.androidarchsamples.network.requests.QuoteGetService;
+import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -21,18 +29,37 @@ public class DataManager {
     List<Product> inSaleProductList;
     List<Product> soldOutProductList;
 
+    private SchedulerProvider schedulerProvider;
+    private RetrofitFactory retrofitFactory;
+
+    public DataManager(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
+        this.retrofitFactory = retrofitFactory;
+        this.schedulerProvider = schedulerProvider;
+    }
+
+    // method to return data either cached one or remote one
     public Observable<List<String>> getQuoteList() {
+        Log.i("CHECK_", "quote list is " + quotes);
+        if(quotes == null) {
+            return getRemoteQuoteList().doOnNext(quotes -> {
+                Log.i("CHECK_", "caching quote list as " + quotes);
+                this.quotes = quotes;
+            });
+        }
+
         return Observable.fromCallable(() -> {
-            if(quotes == null) {
-                quotes = new ArrayList<>();
-                for (int i = 1; i < 10; i++) {
-                    quotes.add("Quote Number " + i);
-                }
-            }
-            Thread.sleep(2000);
+            Log.i("CHECK_", "cached quote list is " + quotes);
             return quotes;
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+        }).subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui());
+    }
+
+    /*
+    remote call to fetch data
+     */
+    private Observable<List<String>> getRemoteQuoteList() {
+        return new QuoteGetService(retrofitFactory, schedulerProvider)
+                .getQuotes().map(QuoteListResponse::getQuotes);
     }
 
     public Completable addQuote(String quote) {

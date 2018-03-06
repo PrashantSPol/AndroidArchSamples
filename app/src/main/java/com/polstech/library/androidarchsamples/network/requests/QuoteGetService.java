@@ -1,7 +1,9 @@
 package com.polstech.library.androidarchsamples.network.requests;
 
+import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
 import com.polstech.library.androidarchsamples.network.ApiService;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
+import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
 
 import java.util.List;
 
@@ -14,7 +16,11 @@ import retrofit2.Retrofit;
 
 public class QuoteGetService extends ApiService {
 
-    public Observable<List<String>> getQuotes() {
+    public QuoteGetService(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
+        super(retrofitFactory, schedulerProvider);
+    }
+
+    public Observable<QuoteListResponse> getQuotes() {
         Retrofit retrofit = retrofitFactory.getRetrofit();
         IQuoteGet quoteGet = retrofit.create(IQuoteGet.class);
 
