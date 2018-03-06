@@ -6,11 +6,11 @@ package com.polstech.library.androidarchsamples.ui.sellingList.common;
 
 public class Product {
     public String productName;
-    public int imageUrl;
+    public String imageUrl;
     public int price;
     public boolean isInSale;
 
-    public Product(String productName, int imageUrl, int price, boolean isInSale) {
+    public Product(String productName, String imageUrl, int price, boolean isInSale) {
         this.productName = productName;
         this.imageUrl = imageUrl;
         this.price = price;

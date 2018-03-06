@@ -6,9 +6,11 @@ import com.polstech.library.androidarchsamples.R;
 import com.polstech.library.androidarchsamples.data.CacheHelper;
 import com.polstech.library.androidarchsamples.data.CacheHelperImpl;
 import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
+import com.polstech.library.androidarchsamples.model.responses.SellingResponse;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
 import com.polstech.library.androidarchsamples.network.quotes.QuoteGetService;
 import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
+import com.polstech.library.androidarchsamples.network.selling.SellingService;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 
 import java.util.ArrayList;
@@ -23,9 +25,6 @@ import io.reactivex.Observable;
  */
 
 public class DataManager {
-    List<Product> inSaleProductList;
-    List<Product> soldOutProductList;
-
     private SchedulerProvider schedulerProvider;
     private RetrofitFactory retrofitFactory;
     private CacheHelper cacheHelper;
@@ -75,32 +74,50 @@ public class DataManager {
         return getQuoteList().map(quoteList -> quoteList.add(quote)).ignoreElements();
     }
 
+    /*
+    returns product list which are in sell
+     */
     public Observable<List<Product>> getInSaleProductList() {
+        List<Product> inSalProductList = cacheHelper.getInSaleProducts();
+        if (inSalProductList == null) {
+            return getRemoteInSaleProductList()
+                    .doOnNext(inSaleProductList -> cacheHelper.setInSaleProducts(inSaleProductList));
+        }
         return Observable.fromCallable(() -> {
-            if(inSaleProductList == null) {
-                inSaleProductList = new ArrayList<>();
-                for (int i = 1; i <= 10; i++) {
-                    Product product = new Product("Product " + i, R.drawable.koala, i * 100, true);
-                    inSaleProductList.add(product);
-                }
-            }
-
-            return inSaleProductList;
+            return inSalProductList;
         });
     }
 
+    /*
+    fetch in sale products remotely
+     */
+    private Observable<List<Product>> getRemoteInSaleProductList() {
+        return new SellingService(retrofitFactory, schedulerProvider)
+                .getInSaleProducts()
+                .map(SellingResponse::getProducts);
+    }
 
+    /*
+    returns list of sold out products
+     */
     public Observable<List<Product>> getSoldOutProductList() {
-        return Observable.fromCallable(() -> {
-            if(soldOutProductList == null) {
-                soldOutProductList = new ArrayList<>();
-                for (int i = 1; i <= 10; i++) {
-                    Product product = new Product("Product " + i, R.drawable.koala, i * 100, false);
-                    soldOutProductList.add(product);
-                }
-            }
+        List<Product> soldOutProductList = cacheHelper.getSoldOutProducts();
 
+        if(soldOutProductList == null) {
+            return getRemoteSoldOutProductList();
+        }
+
+        return Observable.fromCallable(() -> {
             return soldOutProductList;
         });
+    }
+
+    /*
+    fetch list remotely
+     */
+    private Observable<List<Product>> getRemoteSoldOutProductList() {
+        return new SellingService(retrofitFactory, schedulerProvider)
+                .getSoldOutProducts()
+                .map(SellingResponse::getProducts);
     }
 }

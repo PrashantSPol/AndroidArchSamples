@@ -9,7 +9,7 @@ import retrofit2.http.GET;
  * Created by prashant.pol on 3/6/2018.
  */
 
-public interface IInSellGet {
+public interface ISellingGet {
     @GET("selling_sell.json")
     Observable<SellingResponse> getInSellProducts();
 

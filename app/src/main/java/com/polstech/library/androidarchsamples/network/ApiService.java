@@ -2,6 +2,8 @@ package com.polstech.library.androidarchsamples.network;
 
 import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
 
+import io.reactivex.Observable;
+
 /**
  * Created by prashant.pol on 3/6/2018.
  */

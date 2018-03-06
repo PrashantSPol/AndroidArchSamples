@@ -1,5 +1,8 @@
 package com.polstech.library.androidarchsamples.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.inject.Singleton;
 
 import retrofit2.Retrofit;
@@ -15,9 +18,10 @@ public class RetrofitFactory {
     private final String BASE_URL = "https://raw.githubusercontent.com/PrashantSPol/AndroidArchSamples/master/resources/api/";
 
     public Retrofit getRetrofit() {
+
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
