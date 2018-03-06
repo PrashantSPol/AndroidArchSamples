@@ -3,9 +3,9 @@ package com.polstech.library.androidarchsamples.di;
 import android.app.Application;
 import android.content.Context;
 
-import com.polstech.library.androidarchsamples.AndroidArchSampleApp;
 import com.polstech.library.androidarchsamples.di.qualifier.AppContext;
 import com.polstech.library.androidarchsamples.logic.DataManager;
+import com.polstech.library.androidarchsamples.network.RetrofitFactory;
 import com.polstech.library.androidarchsamples.util.ToastUtil;
 
 import javax.inject.Singleton;
@@ -36,5 +36,11 @@ public class AppModule {
     @Singleton
     public ToastUtil providesToastUtil(@AppContext Context context) {
         return new ToastUtil(context);
+    }
+
+    @Provides
+    @Singleton
+    public RetrofitFactory getRetrofitFactory() {
+        return new RetrofitFactory();
     }
 }

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by prashant.pol on 3/5/2018.
  */
 @Singleton
-public class RetrofitAdapter {
+public class RetrofitFactory {
 
     private final String BASE_URL = "https://raw.githubusercontent.com/PrashantSPol/AndroidArchSamples/master/resources/api/";
 
