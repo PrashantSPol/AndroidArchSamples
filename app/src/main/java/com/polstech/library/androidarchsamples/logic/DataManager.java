@@ -3,55 +3,61 @@ package com.polstech.library.androidarchsamples.logic;
 import android.util.Log;
 
 import com.polstech.library.androidarchsamples.R;
+import com.polstech.library.androidarchsamples.data.CacheHelper;
+import com.polstech.library.androidarchsamples.data.CacheHelperImpl;
 import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
-import com.polstech.library.androidarchsamples.network.ApiService;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
-import com.polstech.library.androidarchsamples.network.requests.QuoteGetService;
+import com.polstech.library.androidarchsamples.network.quotes.QuoteGetService;
 import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by polprashant on 18/02/18.
  */
 
 public class DataManager {
-    List<String> quotes;
     List<Product> inSaleProductList;
     List<Product> soldOutProductList;
 
     private SchedulerProvider schedulerProvider;
     private RetrofitFactory retrofitFactory;
+    private CacheHelper cacheHelper;
 
     public DataManager(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
         this.retrofitFactory = retrofitFactory;
         this.schedulerProvider = schedulerProvider;
+        this.cacheHelper = new CacheHelperImpl();
     }
 
     // method to return data either cached one or remote one
     public Observable<List<String>> getQuoteList() {
-        Log.i("CHECK_", "quote list is " + quotes);
+        List<String> quotes = getCachedQuoteList();
+
         if(quotes == null) {
-            return getRemoteQuoteList().doOnNext(quotes -> {
-                Log.i("CHECK_", "caching quote list as " + quotes);
-                this.quotes = quotes;
+            return getRemoteQuoteList().map(quoteList -> {
+                cacheHelper.setQuoteList(quoteList);
+                return cacheHelper.getQuoteList();
             });
         }
 
         return Observable.fromCallable(() -> {
-            Log.i("CHECK_", "cached quote list is " + quotes);
             return quotes;
         }).subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui());
+    }
+
+    /*
+    return cached quote list
+     */
+    private List<String> getCachedQuoteList() {
+        return cacheHelper.getQuoteList();
     }
 
     /*
@@ -62,14 +68,11 @@ public class DataManager {
                 .getQuotes().map(QuoteListResponse::getQuotes);
     }
 
+    /*
+    Method to add data into cache
+     */
     public Completable addQuote(String quote) {
-        return new Completable() {
-            @Override
-            protected void subscribeActual(CompletableObserver s) {
-                quotes.add(quote);
-                s.onComplete();
-            }
-        };
+        return getQuoteList().map(quoteList -> quoteList.add(quote)).ignoreElements();
     }
 
     public Observable<List<Product>> getInSaleProductList() {

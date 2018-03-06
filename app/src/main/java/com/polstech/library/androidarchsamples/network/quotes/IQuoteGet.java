@@ -1,8 +1,6 @@
-package com.polstech.library.androidarchsamples.network.requests;
+package com.polstech.library.androidarchsamples.network.quotes;
 
 import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

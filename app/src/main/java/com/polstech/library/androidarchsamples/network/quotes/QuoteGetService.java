@@ -1,11 +1,9 @@
-package com.polstech.library.androidarchsamples.network.requests;
+package com.polstech.library.androidarchsamples.network.quotes;
 
 import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
 import com.polstech.library.androidarchsamples.network.ApiService;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
 import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
