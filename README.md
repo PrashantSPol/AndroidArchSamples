@@ -7,3 +7,4 @@ Android project sample to learn following architecture and libraries
 - Android DataBinding
 - Retrofit2
 - Retrofit adapter for RxJava2 Binding
+- Retrokfit logging interceptor
