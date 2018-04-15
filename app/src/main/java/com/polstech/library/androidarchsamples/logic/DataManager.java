@@ -40,20 +40,25 @@ public class DataManager {
     // method to return data either cached one or remote one
     public Observable<List<String>> getQuoteList() {
         List<String> quotes = getDbQuoteList();
-        
+        Log.i("CHECK_", "getQuoteList " + quotes);
         if(quotes == null) {
-            getRemoteQuoteList()
+            return getRemoteQuoteList()
+                    .subscribeOn(schedulerProvider.io())
                     .concatMapCompletable(quoteList ->
                                 Completable.fromAction(() -> dbHelper.setQuoteList(quoteList))
+                                        .subscribeOn(schedulerProvider.io())
+                                        .observeOn(schedulerProvider.ui())
                             )
-                   .doOnComplete(() -> dbHelper.getQuoteList().getValue());
+                   .doOnComplete(() -> dbHelper.getQuoteList().getValue())
+                    .observeOn(schedulerProvider.ui())
+                    .toObservable();
 
+        } else {
+            return Observable.fromCallable(() -> {
+                return quotes;
+            }).subscribeOn(schedulerProvider.io())
+                    .observeOn(schedulerProvider.ui());
         }
-
-        return Observable.fromCallable(() -> {
-            return quotes;
-        }).subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui());
     }
 
     /*
