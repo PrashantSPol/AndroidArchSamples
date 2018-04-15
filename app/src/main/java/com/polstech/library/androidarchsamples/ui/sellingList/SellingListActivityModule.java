@@ -2,7 +2,13 @@ package com.polstech.library.androidarchsamples.ui.sellingList;
 
 import android.content.Context;
 
+import com.polstech.library.androidarchsamples.data.db.helper.IDbHelper;
 import com.polstech.library.androidarchsamples.di.qualifier.AppContext;
+import com.polstech.library.androidarchsamples.logic.DataManager;
+import com.polstech.library.androidarchsamples.network.RetrofitFactory;
+import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvider;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;

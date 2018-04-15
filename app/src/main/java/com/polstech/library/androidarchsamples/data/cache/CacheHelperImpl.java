@@ -1,5 +1,6 @@
-package com.polstech.library.androidarchsamples.data;
+package com.polstech.library.androidarchsamples.data.cache;
 
+import com.polstech.library.androidarchsamples.data.cache.CacheHelper;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 
 import java.util.List;

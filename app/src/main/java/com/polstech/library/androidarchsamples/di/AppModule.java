@@ -3,6 +3,8 @@ package com.polstech.library.androidarchsamples.di;
 import android.app.Application;
 import android.content.Context;
 
+import com.polstech.library.androidarchsamples.data.db.helper.DbHelper;
+import com.polstech.library.androidarchsamples.data.db.helper.IDbHelper;
 import com.polstech.library.androidarchsamples.di.qualifier.AppContext;
 import com.polstech.library.androidarchsamples.logic.DataManager;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
@@ -29,8 +31,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    DataManager providesDataProvider(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
-        return new DataManager(retrofitFactory, schedulerProvider);
+    DataManager providesDataProvider(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider, IDbHelper dbHelper) {
+        return new DataManager(retrofitFactory, schedulerProvider, dbHelper);
     }
 
 

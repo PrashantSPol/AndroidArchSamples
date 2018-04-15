@@ -2,9 +2,10 @@ package com.polstech.library.androidarchsamples.logic;
 
 import android.util.Log;
 
-import com.polstech.library.androidarchsamples.R;
-import com.polstech.library.androidarchsamples.data.CacheHelper;
-import com.polstech.library.androidarchsamples.data.CacheHelperImpl;
+import com.polstech.library.androidarchsamples.data.cache.CacheHelper;
+import com.polstech.library.androidarchsamples.data.cache.CacheHelperImpl;
+import com.polstech.library.androidarchsamples.data.db.helper.DbHelper;
+import com.polstech.library.androidarchsamples.data.db.helper.IDbHelper;
 import com.polstech.library.androidarchsamples.model.responses.QuoteListResponse;
 import com.polstech.library.androidarchsamples.model.responses.SellingResponse;
 import com.polstech.library.androidarchsamples.network.RetrofitFactory;
@@ -13,11 +14,10 @@ import com.polstech.library.androidarchsamples.network.schedulers.SchedulerProvi
 import com.polstech.library.androidarchsamples.network.selling.SellingService;
 import com.polstech.library.androidarchsamples.ui.sellingList.common.Product;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
 import io.reactivex.Observable;
 
 /**
@@ -28,22 +28,26 @@ public class DataManager {
     private SchedulerProvider schedulerProvider;
     private RetrofitFactory retrofitFactory;
     private CacheHelper cacheHelper;
+    private IDbHelper dbHelper;
 
-    public DataManager(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider) {
+    public DataManager(RetrofitFactory retrofitFactory, SchedulerProvider schedulerProvider, IDbHelper dbHelper) {
         this.retrofitFactory = retrofitFactory;
         this.schedulerProvider = schedulerProvider;
         this.cacheHelper = new CacheHelperImpl();
+        this.dbHelper = dbHelper;
     }
 
     // method to return data either cached one or remote one
     public Observable<List<String>> getQuoteList() {
-        List<String> quotes = getCachedQuoteList();
-
+        List<String> quotes = getDbQuoteList();
+        
         if(quotes == null) {
-            return getRemoteQuoteList().map(quoteList -> {
-                cacheHelper.setQuoteList(quoteList);
-                return cacheHelper.getQuoteList();
-            });
+            getRemoteQuoteList()
+                    .concatMapCompletable(quoteList ->
+                                Completable.fromAction(() -> dbHelper.setQuoteList(quoteList))
+                            )
+                   .doOnComplete(() -> dbHelper.getQuoteList().getValue());
+
         }
 
         return Observable.fromCallable(() -> {
@@ -57,6 +61,10 @@ public class DataManager {
      */
     private List<String> getCachedQuoteList() {
         return cacheHelper.getQuoteList();
+    }
+
+    private List<String> getDbQuoteList() {
+        return dbHelper.getQuoteList().getValue();
     }
 
     /*
